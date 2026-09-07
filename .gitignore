@@ -1,8 +1,30 @@
 .env
+.env.*
 .venv/
+.venv_indictrans/
+.venv_indictts/
+
 __pycache__/
-.pytest_cache/
 *.pyc
+.pytest_cache/
 .vscode/
 alembic/versions/__pycache__/
-.env.*
+
+# Local model weights - do not commit
+*.pth
+*.pt
+*.ckpt
+*.safetensors
+*.onnx
+
+# Generated audio/test artifacts
+services/m2_language/tests/audio/*_cache/
+services/m2_language/tests/audio/tts_cache/
+services/m2_language/tests/audio/pipeline_test_cache/
+services/m2_language/tests/audio/*.wav
+
+# Local runtime/generated files
+*.log
+
+# Required M2 audio test fixture
+!services/m2_language/tests/audio/test_converted.wav

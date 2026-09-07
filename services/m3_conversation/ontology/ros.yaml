@@ -1,0 +1,363 @@
+questions:
+
+  # =========================
+  # GENERAL
+  # =========================
+
+  - id: ros.general.fever
+    section: ros_general
+    framework: ros
+    text_en: "Have you had fever or chills?"
+    value_type: boolean
+    options:
+      - key: yes
+        label_en: "Yes"
+        icon: "yes"
+      - key: no
+        label_en: "No"
+        icon: "no"
+    ask_if: []
+    priority: medium
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: ros.general.fatigue
+    section: ros_general
+    framework: ros
+    text_en: "Have you been feeling unusually tired or weak?"
+    value_type: boolean
+    options:
+      - key: yes
+        label_en: "Yes"
+        icon: "yes"
+      - key: no
+        label_en: "No"
+        icon: "no"
+    ask_if: []
+    priority: medium
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  # =========================
+  # CARDIOVASCULAR
+  # =========================
+
+  - id: ros.cardiovascular.chest_discomfort
+    section: ros_cardiovascular
+    framework: ros
+    text_en: "Have you had chest discomfort or pressure?"
+    value_type: boolean
+    options:
+      - key: yes
+        label_en: "Yes"
+        icon: "yes"
+      - key: no
+        label_en: "No"
+        icon: "no"
+    ask_if:
+      - branch: cardiac
+    priority: high
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: ros.cardiovascular.palpitations
+    section: ros_cardiovascular
+    framework: ros
+    text_en: "Have you noticed your heart beating unusually fast, hard, or irregularly?"
+    value_type: boolean
+    options:
+      - key: yes
+        label_en: "Yes"
+        icon: "yes"
+      - key: no
+        label_en: "No"
+        icon: "no"
+    ask_if:
+      - branch: cardiac
+    priority: medium
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: ros.cardiovascular.leg_swelling
+    section: ros_cardiovascular
+    framework: ros
+    text_en: "Have you noticed swelling in your legs or feet?"
+    value_type: boolean
+    options:
+      - key: yes
+        label_en: "Yes"
+        icon: "yes"
+      - key: no
+        label_en: "No"
+        icon: "no"
+    ask_if:
+      - branch: cardiac
+    priority: medium
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  # =========================
+  # RESPIRATORY
+  # =========================
+
+  - id: ros.respiratory.cough
+    section: ros_respiratory
+    framework: ros
+    text_en: "Have you had a cough recently?"
+    value_type: boolean
+    options:
+      - key: yes
+        label_en: "Yes"
+        icon: "yes"
+      - key: no
+        label_en: "No"
+        icon: "no"
+    ask_if:
+      - branch: respiratory
+    priority: high
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: ros.respiratory.breathlessness
+    section: ros_respiratory
+    framework: ros
+    text_en: "Have you had difficulty breathing or shortness of breath?"
+    value_type: boolean
+    options:
+      - key: yes
+        label_en: "Yes"
+        icon: "yes"
+      - key: no
+        label_en: "No"
+        icon: "no"
+    ask_if:
+      - branch: respiratory
+    priority: high
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: ros.respiratory.wheezing
+    section: ros_respiratory
+    framework: ros
+    text_en: "Have you noticed wheezing or a whistling sound while breathing?"
+    value_type: boolean
+    options:
+      - key: yes
+        label_en: "Yes"
+        icon: "yes"
+      - key: no
+        label_en: "No"
+        icon: "no"
+    ask_if:
+      - branch: respiratory
+    priority: medium
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  # =========================
+  # GASTROINTESTINAL
+  # =========================
+
+  - id: ros.gastrointestinal.nausea
+    section: ros_gastrointestinal
+    framework: ros
+    text_en: "Have you had nausea or an upset stomach?"
+    value_type: boolean
+    options:
+      - key: yes
+        label_en: "Yes"
+        icon: "yes"
+      - key: no
+        label_en: "No"
+        icon: "no"
+    ask_if:
+      - branch: gastrointestinal
+    priority: high
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: ros.gastrointestinal.bowel_change
+    section: ros_gastrointestinal
+    framework: ros
+    text_en: "Have you noticed any recent change in your bowel movements?"
+    value_type: boolean
+    options:
+      - key: yes
+        label_en: "Yes"
+        icon: "yes"
+      - key: no
+        label_en: "No"
+        icon: "no"
+    ask_if:
+      - branch: gastrointestinal
+    priority: medium
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: ros.gastrointestinal.appetite
+    section: ros_gastrointestinal
+    framework: ros
+    text_en: "Have you noticed any change in your appetite?"
+    value_type: boolean
+    options:
+      - key: yes
+        label_en: "Yes"
+        icon: "yes"
+      - key: no
+        label_en: "No"
+        icon: "no"
+    ask_if:
+      - branch: gastrointestinal
+    priority: medium
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  # =========================
+  # NEUROLOGICAL
+  # =========================
+
+  - id: ros.neurological.headache
+    section: ros_neurological
+    framework: ros
+    text_en: "Have you had headaches recently?"
+    value_type: boolean
+    options:
+      - key: yes
+        label_en: "Yes"
+        icon: "yes"
+      - key: no
+        label_en: "No"
+        icon: "no"
+    ask_if:
+      - branch: neurological
+    priority: high
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: ros.neurological.dizziness
+    section: ros_neurological
+    framework: ros
+    text_en: "Have you experienced dizziness or a spinning sensation?"
+    value_type: boolean
+    options:
+      - key: yes
+        label_en: "Yes"
+        icon: "yes"
+      - key: no
+        label_en: "No"
+        icon: "no"
+    ask_if:
+      - branch: neurological
+    priority: medium
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: ros.neurological.numbness
+    section: ros_neurological
+    framework: ros
+    text_en: "Have you experienced numbness or tingling?"
+    value_type: boolean
+    options:
+      - key: yes
+        label_en: "Yes"
+        icon: "yes"
+      - key: no
+        label_en: "No"
+        icon: "no"
+    ask_if:
+      - branch: neurological
+    priority: medium
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  # =========================
+  # MUSCULOSKELETAL
+  # =========================
+
+  - id: ros.musculoskeletal.joint_pain
+    section: ros_musculoskeletal
+    framework: ros
+    text_en: "Have you had pain or discomfort in any other joints?"
+    value_type: boolean
+    options:
+      - key: yes
+        label_en: "Yes"
+        icon: "yes"
+      - key: no
+        label_en: "No"
+        icon: "no"
+    ask_if:
+      - branch: musculoskeletal
+    priority: high
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: ros.musculoskeletal.stiffness
+    section: ros_musculoskeletal
+    framework: ros
+    text_en: "Have you experienced stiffness in your joints or muscles?"
+    value_type: boolean
+    options:
+      - key: yes
+        label_en: "Yes"
+        icon: "yes"
+      - key: no
+        label_en: "No"
+        icon: "no"
+    ask_if:
+      - branch: musculoskeletal
+    priority: medium
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: ros.musculoskeletal.swelling
+    section: ros_musculoskeletal
+    framework: ros
+    text_en: "Have you noticed swelling in any joints?"
+    value_type: boolean
+    options:
+      - key: yes
+        label_en: "Yes"
+        icon: "yes"
+      - key: no
+        label_en: "No"
+        icon: "no"
+    ask_if:
+      - branch: musculoskeletal
+    priority: medium
+    mandatory: false
+    input_modes:
+      - voice
+      - touch

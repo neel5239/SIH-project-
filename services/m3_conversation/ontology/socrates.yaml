@@ -1,0 +1,154 @@
+questions:
+  - id: socrates.site
+    section: socrates
+    framework: socrates
+    text_en: "Where exactly is the problem located?"
+    value_type: text
+    options: []
+    ask_if:
+      - slot_exists: general.chief_complaint
+    priority: high
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: socrates.onset
+    section: socrates
+    framework: socrates
+    text_en: "When did the problem start, and did it begin suddenly or gradually?"
+    value_type: text
+    options: []
+    ask_if:
+      - slot_exists: general.chief_complaint
+    priority: high
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: socrates.character
+    section: socrates
+    framework: socrates
+    text_en: "What does the problem feel like?"
+    value_type: text
+    options:
+      - key: sharp
+        label_en: "Sharp"
+        icon: "sharp"
+      - key: dull
+        label_en: "Dull"
+        icon: "dull"
+      - key: burning
+        label_en: "Burning"
+        icon: "burning"
+      - key: pressure
+        label_en: "Pressure"
+        icon: "pressure"
+      - key: aching
+        label_en: "Aching"
+        icon: "aching"
+      - key: other
+        label_en: "Other"
+        icon: "other"
+    ask_if:
+      - slot_exists: general.chief_complaint
+    priority: high
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: socrates.radiation
+    section: socrates
+    framework: socrates
+    text_en: "Does the problem spread or move to another part of your body?"
+    value_type: text
+    options:
+      - key: yes
+        label_en: "Yes"
+        icon: "yes"
+      - key: no
+        label_en: "No"
+        icon: "no"
+    ask_if:
+      - slot_exists: general.chief_complaint
+    priority: medium
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: socrates.associated_symptoms
+    section: socrates
+    framework: socrates
+    text_en: "What other symptoms occur along with this problem?"
+    value_type: text
+    options: []
+    ask_if:
+      - slot_exists: general.chief_complaint
+    priority: high
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: socrates.timing
+    section: socrates
+    framework: socrates
+    text_en: "When does the problem usually occur, and how long does it last?"
+    value_type: text
+    options: []
+    ask_if:
+      - slot_exists: general.chief_complaint
+    priority: medium
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: socrates.exacerbating
+    section: socrates
+    framework: socrates
+    text_en: "What makes the problem worse?"
+    value_type: text
+    options: []
+    ask_if:
+      - slot_exists: general.chief_complaint
+    priority: medium
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: socrates.severity
+    section: socrates
+    framework: socrates
+    text_en: "How severe is the problem from 0 to 10?"
+    value_type: severity
+    options:
+      - key: 0
+        label_en: "0"
+        icon: "face-0"
+      - key: 2
+        label_en: "2"
+        icon: "face-2"
+      - key: 4
+        label_en: "4"
+        icon: "face-4"
+      - key: 6
+        label_en: "6"
+        icon: "face-6"
+      - key: 8
+        label_en: "8"
+        icon: "face-8"
+      - key: 10
+        label_en: "10"
+        icon: "face-10"
+    ask_if:
+      - slot_exists: general.chief_complaint
+    priority: high
+    mandatory: false
+    input_modes:
+      - voice
+      - touch

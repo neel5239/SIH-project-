@@ -1,0 +1,163 @@
+﻿questions:
+  - id: general.chief_complaint
+    section: general
+    framework: general
+    text_en: "What is the main problem that brought you here today?"
+    value_type: text
+    options: []
+    ask_if: []
+    priority: high
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: hpi.duration
+    section: hpi
+    framework: general
+    text_en: "How long have you had this problem?"
+    value_type: duration
+    options:
+      - key: today
+        label_en: "Today"
+        icon: "today"
+      - key: two_to_three_days
+        label_en: "2–3 days"
+        icon: "calendar-3"
+      - key: one_week
+        label_en: "About a week"
+        icon: "calendar-7"
+      - key: one_month
+        label_en: "About a month"
+        icon: "calendar-30"
+      - key: longer
+        label_en: "Longer"
+        icon: "calendar-long"
+    ask_if: []
+    priority: high
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: hpi.severity
+    section: hpi
+    framework: general
+    text_en: "How severe is the problem?"
+    value_type: severity
+    options:
+      - key: 0
+        label_en: "No problem"
+        icon: "face-0"
+      - key: 2
+        label_en: "Very mild"
+        icon: "face-2"
+      - key: 4
+        label_en: "Mild"
+        icon: "face-4"
+      - key: 6
+        label_en: "Moderate"
+        icon: "face-6"
+      - key: 8
+        label_en: "Severe"
+        icon: "face-8"
+      - key: 10
+        label_en: "Worst"
+        icon: "face-10"
+    ask_if: []
+    priority: high
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: hpi.onset
+    section: hpi
+    framework: general
+    text_en: "When did the problem start?"
+    value_type: text
+    options: []
+    ask_if: []
+    priority: high
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: hpi.location
+    section: hpi
+    framework: general
+    text_en: "Where exactly do you feel the problem?"
+    value_type: text
+    options: []
+    ask_if: []
+    priority: high
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: hpi.character
+    section: hpi
+    framework: general
+    text_en: "How would you describe the problem or sensation?"
+    value_type: text
+    options: []
+    ask_if: []
+    priority: medium
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: hpi.aggravating_factors
+    section: hpi
+    framework: general
+    text_en: "What makes the problem worse?"
+    value_type: text
+    options: []
+    ask_if: []
+    priority: medium
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: hpi.relieving_factors
+    section: hpi
+    framework: general
+    text_en: "What makes the problem better?"
+    value_type: text
+    options: []
+    ask_if: []
+    priority: medium
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: hpi.associated_symptoms
+    section: hpi
+    framework: general
+    text_en: "What other symptoms are you having?"
+    value_type: text
+    options: []
+    ask_if: []
+    priority: medium
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: general.past_medical_history
+    section: general
+    framework: general
+    text_en: "Do you have any important medical conditions or illnesses?"
+    value_type: text
+    options: []
+    ask_if: []
+    priority: medium
+    mandatory: false
+    input_modes:
+      - voice
+      - touch

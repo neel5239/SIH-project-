@@ -1,0 +1,228 @@
+rules:
+
+  - id: CARDIAC-01
+    name: "Acute coronary syndrome pattern"
+    severity: critical
+    all_of:
+      - any_of:
+          - {slot: socrates.site, in: [chest, retrosternal, epigastric]}
+          - {slot: general.chief_complaint, contains_any: [chest pain, chest pressure, chest tightness]}
+      - any_of:
+          - {slot: socrates.radiation, contains_any: [left_arm, jaw, both_arms, arm]}
+          - {slot: socrates.associated_symptoms, contains_any: [diaphoresis, sweating, dyspnoea, breathlessness]}
+      - any_of:
+          - {slot: socrates.onset, within_hours: 24}
+          - {slot: hpi.duration, within_hours: 24}
+    action: abort_and_escalate
+    message_key: rf.cardiac.stop
+    notify:
+      - triage_desk
+      - physician_on_duty
+
+
+  - id: STROKE-01
+    name: "Acute stroke FAST pattern"
+    severity: critical
+    all_of:
+      - any_of:
+          - {slot: general.chief_complaint, contains_any: [face droop, facial weakness]}
+          - {slot: hpi.associated_symptoms, contains_any: [face droop, facial weakness]}
+      - any_of:
+          - {slot: general.chief_complaint, contains_any: [arm weakness, limb weakness, one-sided weakness]}
+          - {slot: hpi.associated_symptoms, contains_any: [arm weakness, limb weakness, one-sided weakness]}
+      - any_of:
+          - {slot: general.chief_complaint, contains_any: [speech difficulty, slurred speech, unable to speak]}
+          - {slot: hpi.associated_symptoms, contains_any: [speech difficulty, slurred speech, unable to speak]}
+      - any_of:
+          - {slot: socrates.onset, contains_any: [sudden, suddenly]}
+          - {slot: hpi.onset, contains_any: [sudden, suddenly]}
+    action: abort_and_escalate
+    message_key: rf.stroke.stop
+    notify:
+      - triage_desk
+      - physician_on_duty
+
+
+  - id: RESP-01
+    name: "Severe breathlessness at rest"
+    severity: critical
+    all_of:
+      - any_of:
+          - {slot: general.chief_complaint, contains_any: [severe breathlessness, severe shortness of breath]}
+          - {slot: hpi.associated_symptoms, contains_any: [severe breathlessness, severe shortness of breath]}
+          - {slot: systems.respiratory.cough, contains_any: [breathless, cannot breathe]}
+      - any_of:
+          - {slot: general.chief_complaint, contains_any: [at rest, cannot complete a sentence, unable to speak]}
+          - {slot: hpi.associated_symptoms, contains_any: [at rest, cannot complete a sentence, unable to speak]}
+    action: abort_and_escalate
+    message_key: rf.respiratory.stop
+    notify:
+      - triage_desk
+      - physician_on_duty
+
+
+  - id: BLEED-01
+    name: "Significant active bleeding"
+    severity: critical
+    any_of:
+      - {slot: general.chief_complaint, contains_any: [heavy bleeding, severe bleeding, vomiting blood, haematemesis, hematemesis, black stool, melaena, melena]}
+      - {slot: hpi.associated_symptoms, contains_any: [heavy bleeding, severe bleeding, vomiting blood, haematemesis, hematemesis, black stool, melaena, melena]}
+      - {slot: general.chief_complaint, contains_any: [blood loss]}
+    action: abort_and_escalate
+    message_key: rf.bleeding.stop
+    notify:
+      - triage_desk
+      - physician_on_duty
+
+
+  - id: SEPSIS-01
+    name: "Possible severe infection pattern"
+    severity: critical
+    all_of:
+      - any_of:
+          - {slot: ros.general.fever, contains_any: [yes, fever, high fever]}
+          - {slot: general.chief_complaint, contains_any: [fever]}
+      - any_of:
+          - {slot: general.chief_complaint, contains_any: [confusion, confused, altered consciousness]}
+          - {slot: hpi.associated_symptoms, contains_any: [confusion, confused, altered consciousness]}
+          - {slot: hpi.associated_symptoms, contains_any: [very low urine, not passing urine]}
+          - {slot: general.chief_complaint, contains_any: [rigors, shaking chills]}
+    action: abort_and_escalate
+    message_key: rf.sepsis.stop
+    notify:
+      - triage_desk
+      - physician_on_duty
+
+
+  - id: ABDO-01
+    name: "Acute abdomen pattern"
+    severity: critical
+    all_of:
+      - any_of:
+          - {slot: socrates.site, in: [abdomen, abdominal, epigastric]}
+          - {slot: general.chief_complaint, contains_any: [severe abdominal pain, severe stomach pain]}
+      - any_of:
+          - {slot: socrates.onset, contains_any: [sudden, suddenly]}
+          - {slot: hpi.onset, contains_any: [sudden, suddenly]}
+      - any_of:
+          - {slot: general.chief_complaint, contains_any: [rigidity, rigid abdomen, hard abdomen]}
+          - {slot: hpi.associated_symptoms, contains_any: [rigidity, rigid abdomen, hard abdomen]}
+    action: abort_and_escalate
+    message_key: rf.abdominal.stop
+    notify:
+      - triage_desk
+      - physician_on_duty
+
+
+  - id: NEURO-01
+    name: "Dangerous acute headache pattern"
+    severity: critical
+    all_of:
+      - any_of:
+          - {slot: socrates.site, in: [head, headache]}
+          - {slot: general.chief_complaint, contains_any: [headache, severe headache]}
+      - any_of:
+          - {slot: general.chief_complaint, contains_any: [worst headache, worst-ever headache, sudden severe headache]}
+          - {slot: hpi.associated_symptoms, contains_any: [neck stiffness, stiff neck]}
+          - {slot: ros.general.fever, contains_any: [yes, fever]}
+    action: abort_and_escalate
+    message_key: rf.neuro.stop
+    notify:
+      - triage_desk
+      - physician_on_duty
+
+
+  - id: PEDS-01
+    name: "Fever in infant under three months"
+    severity: critical
+    all_of:
+      - any_of:
+          - {slot: ros.general.fever, contains_any: [yes, fever]}
+          - {slot: general.chief_complaint, contains_any: [fever]}
+      - any_of:
+          - {slot: patient.age_months, less_than: 3}
+          - {slot: age_months, less_than: 3}
+    action: abort_and_escalate
+    message_key: rf.pediatric_fever.stop
+    notify:
+      - triage_desk
+      - physician_on_duty
+
+
+  - id: OBS-01
+    name: "Pregnancy with bleeding or severe abdominal pain"
+    severity: critical
+    all_of:
+      - any_of:
+          - {slot: patient.pregnant, equals: true}
+          - {slot: pregnancy, equals: true}
+      - any_of:
+          - {slot: general.chief_complaint, contains_any: [bleeding, vaginal bleeding, severe abdominal pain]}
+          - {slot: hpi.associated_symptoms, contains_any: [bleeding, vaginal bleeding, severe abdominal pain]}
+    action: abort_and_escalate
+    message_key: rf.obstetric.stop
+    notify:
+      - triage_desk
+      - physician_on_duty
+
+
+  - id: TRAUMA-01
+    name: "Recent head injury with danger symptoms"
+    severity: critical
+    all_of:
+      - any_of:
+          - {slot: general.chief_complaint, contains_any: [head injury, head trauma, hit head]}
+          - {slot: hpi.associated_symptoms, contains_any: [head injury, head trauma, hit head]}
+      - any_of:
+          - {slot: hpi.associated_symptoms, contains_any: [vomiting, repeated vomiting]}
+          - {slot: general.chief_complaint, contains_any: [loss of consciousness, unconscious, altered consciousness]}
+    action: abort_and_escalate
+    message_key: rf.trauma.stop
+    notify:
+      - triage_desk
+      - physician_on_duty
+
+
+  - id: SUICIDE-01
+    name: "Expressed self-harm intent"
+    severity: critical
+    any_of:
+      - {slot: general.chief_complaint, contains_any: [self harm, self-harm, suicide, kill myself, end my life]}
+      - {slot: hpi.associated_symptoms, contains_any: [self harm, self-harm, suicide, kill myself, end my life]}
+      - {slot: patient.safety, contains_any: [self harm, self-harm, suicide, kill myself, end my life]}
+    action: abort_and_escalate
+    message_key: rf.self_harm.stop
+    notify:
+      - triage_desk
+      - physician_on_duty
+
+
+  - id: ANAPH-01
+    name: "Possible anaphylaxis pattern"
+    severity: critical
+    all_of:
+      - any_of:
+          - {slot: general.chief_complaint, contains_any: [face swelling, lip swelling, tongue swelling, swollen tongue]}
+          - {slot: hpi.associated_symptoms, contains_any: [face swelling, lip swelling, tongue swelling, swollen tongue]}
+      - any_of:
+          - {slot: general.chief_complaint, contains_any: [breathing difficulty, breathlessness, cannot breathe]}
+          - {slot: hpi.associated_symptoms, contains_any: [breathing difficulty, breathlessness, cannot breathe]}
+    action: abort_and_escalate
+    message_key: rf.anaphylaxis.stop
+    notify:
+      - triage_desk
+      - physician_on_duty  - id: ANAPH-01
+    name: "Possible anaphylaxis pattern"
+    severity: critical
+    all_of:
+      - any_of:
+          - {slot: general.chief_complaint, contains_any: [face and tongue, face swelling, facial swelling, face swollen, tongue swelling, tongue swollen, swollen tongue, lip swelling, lips swollen, swollen lips]}
+          - {slot: hpi.associated_symptoms, contains_any: [face and tongue, face swelling, facial swelling, face swollen, tongue swelling, tongue swollen, swollen tongue, lip swelling, lips swollen, swollen lips]}
+      - any_of:
+          - {slot: general.chief_complaint, contains_any: [breathing difficulty, difficulty breathing, breathlessness, shortness of breath, cannot breathe, trouble breathing]}
+          - {slot: hpi.associated_symptoms, contains_any: [breathing difficulty, difficulty breathing, breathlessness, shortness of breath, cannot breathe, trouble breathing]}
+    action: abort_and_escalate
+    message_key: rf.anaphylaxis.stop
+    notify:
+      - triage_desk
+      - physician_on_duty

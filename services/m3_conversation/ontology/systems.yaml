@@ -1,0 +1,321 @@
+questions:
+
+  # =========================
+  # CARDIAC
+  # =========================
+
+  - id: systems.cardiac.chest_pressure
+    section: cardiac
+    framework: systems
+    text_en: "Do you feel any pressure, heaviness, or tightness in your chest?"
+    value_type: boolean
+    options:
+      - key: yes
+        label_en: "Yes"
+        icon: "yes"
+      - key: no
+        label_en: "No"
+        icon: "no"
+    ask_if:
+      - branch: cardiac
+    priority: high
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: systems.cardiac.palpitations
+    section: cardiac
+    framework: systems
+    text_en: "Have you felt your heart racing, pounding, or beating irregularly?"
+    value_type: boolean
+    options:
+      - key: yes
+        label_en: "Yes"
+        icon: "yes"
+      - key: no
+        label_en: "No"
+        icon: "no"
+    ask_if:
+      - branch: cardiac
+    priority: high
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: systems.cardiac.breathlessness
+    section: cardiac
+    framework: systems
+    text_en: "Do you become short of breath during activity or at rest?"
+    value_type: boolean
+    options:
+      - key: yes
+        label_en: "Yes"
+        icon: "yes"
+      - key: no
+        label_en: "No"
+        icon: "no"
+    ask_if:
+      - branch: cardiac
+    priority: high
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  # =========================
+  # RESPIRATORY
+  # =========================
+
+  - id: systems.respiratory.cough
+    section: respiratory
+    framework: systems
+    text_en: "Do you have a cough?"
+    value_type: boolean
+    options:
+      - key: yes
+        label_en: "Yes"
+        icon: "yes"
+      - key: no
+        label_en: "No"
+        icon: "no"
+    ask_if:
+      - branch: respiratory
+    priority: high
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: systems.respiratory.sputum
+    section: respiratory
+    framework: systems
+    text_en: "Are you coughing up any phlegm or sputum?"
+    value_type: boolean
+    options:
+      - key: yes
+        label_en: "Yes"
+        icon: "yes"
+      - key: no
+        label_en: "No"
+        icon: "no"
+    ask_if:
+      - branch: respiratory
+    priority: medium
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: systems.respiratory.wheezing
+    section: respiratory
+    framework: systems
+    text_en: "Do you have wheezing or a whistling sound when breathing?"
+    value_type: boolean
+    options:
+      - key: yes
+        label_en: "Yes"
+        icon: "yes"
+      - key: no
+        label_en: "No"
+        icon: "no"
+    ask_if:
+      - branch: respiratory
+    priority: medium
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  # =========================
+  # GASTROINTESTINAL
+  # =========================
+
+  - id: systems.gi.nausea
+    section: gastrointestinal
+    framework: systems
+    text_en: "Have you been feeling nauseous or sick to your stomach?"
+    value_type: boolean
+    options:
+      - key: yes
+        label_en: "Yes"
+        icon: "yes"
+      - key: no
+        label_en: "No"
+        icon: "no"
+    ask_if:
+      - branch: gastrointestinal
+    priority: high
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: systems.gi.vomiting
+    section: gastrointestinal
+    framework: systems
+    text_en: "Have you vomited?"
+    value_type: boolean
+    options:
+      - key: yes
+        label_en: "Yes"
+        icon: "yes"
+      - key: no
+        label_en: "No"
+        icon: "no"
+    ask_if:
+      - branch: gastrointestinal
+    priority: high
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: systems.gi.bowel_change
+    section: gastrointestinal
+    framework: systems
+    text_en: "Have you noticed any recent change in your bowel movements?"
+    value_type: boolean
+    options:
+      - key: yes
+        label_en: "Yes"
+        icon: "yes"
+      - key: no
+        label_en: "No"
+        icon: "no"
+    ask_if:
+      - branch: gastrointestinal
+    priority: medium
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  # =========================
+  # NEUROLOGICAL
+  # =========================
+
+  - id: systems.neuro.dizziness
+    section: neurological
+    framework: systems
+    text_en: "Have you experienced dizziness or a spinning sensation?"
+    value_type: boolean
+    options:
+      - key: yes
+        label_en: "Yes"
+        icon: "yes"
+      - key: no
+        label_en: "No"
+        icon: "no"
+    ask_if:
+      - branch: neurological
+    priority: high
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: systems.neuro.weakness
+    section: neurological
+    framework: systems
+    text_en: "Have you noticed any weakness in your arms, legs, or another part of your body?"
+    value_type: boolean
+    options:
+      - key: yes
+        label_en: "Yes"
+        icon: "yes"
+      - key: no
+        label_en: "No"
+        icon: "no"
+    ask_if:
+      - branch: neurological
+    priority: high
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: systems.neuro.vision
+    section: neurological
+    framework: systems
+    text_en: "Have you experienced any changes in your vision?"
+    value_type: boolean
+    options:
+      - key: yes
+        label_en: "Yes"
+        icon: "yes"
+      - key: no
+        label_en: "No"
+        icon: "no"
+    ask_if:
+      - branch: neurological
+    priority: medium
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  # =========================
+  # MUSCULOSKELETAL
+  # =========================
+
+  - id: systems.msk.swelling
+    section: musculoskeletal
+    framework: systems
+    text_en: "Is there any swelling around the affected joint or body part?"
+    value_type: boolean
+    options:
+      - key: yes
+        label_en: "Yes"
+        icon: "yes"
+      - key: no
+        label_en: "No"
+        icon: "no"
+    ask_if:
+      - branch: musculoskeletal
+    priority: high
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: systems.msk.movement
+    section: musculoskeletal
+    framework: systems
+    text_en: "Does movement make the problem worse or limit your movement?"
+    value_type: boolean
+    options:
+      - key: yes
+        label_en: "Yes"
+        icon: "yes"
+      - key: no
+        label_en: "No"
+        icon: "no"
+    ask_if:
+      - branch: musculoskeletal
+    priority: high
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: systems.msk.stiffness
+    section: musculoskeletal
+    framework: systems
+    text_en: "Do you have stiffness in the affected joint or body part?"
+    value_type: boolean
+    options:
+      - key: yes
+        label_en: "Yes"
+        icon: "yes"
+      - key: no
+        label_en: "No"
+        icon: "no"
+    ask_if:
+      - branch: musculoskeletal
+    priority: medium
+    mandatory: false
+    input_modes:
+      - voice
+      - touch

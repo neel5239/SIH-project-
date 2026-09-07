@@ -1,0 +1,12 @@
+from pathlib import Path
+
+
+SERVICE_ROOT = Path(__file__).resolve().parent
+
+ONTOLOGY_DIR = SERVICE_ROOT / "ontology"
+
+DEFAULT_INTERVIEW_TIMEOUT_S = 8 * 60
+PATIENT_IDLE_TIMEOUT_S = 90
+
+LOW_CONFIDENCE_THRESHOLD = 0.60
+CONFIRMATION_THRESHOLD = 0.85
