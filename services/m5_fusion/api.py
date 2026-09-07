@@ -11,6 +11,12 @@ from services.m5_fusion.database.provenance_repository import (
 from services.m5_fusion.database.summary_repository import SummaryRepository
 from services.m5_fusion.services.summary_builder import SummaryBuilder
 from services.m5_fusion.services.physician_render import PhysicianRenderer
+from services.m5_fusion.database.correction_repository import CorrectionRepository
+from services.m5_fusion.database.guardian_repository import GuardianLogRepository
+from services.m5_fusion.database.prakriti_repository import PrakritiRepository
+from services.m5_fusion.services.correction_service import CorrectionService
+from services.m5_fusion.services.fhir_handoff import FHIRHandoff
+from services.m5_fusion.services.patient_recap import PatientRecapService
 
 
 app = FastAPI(
@@ -22,11 +28,18 @@ builder = SummaryBuilder()
 repository = SummaryRepository()
 provenance_repository = ProvenanceRepository()
 physician_renderer = PhysicianRenderer()
+correction_repository = CorrectionRepository()
+correction_service = CorrectionService(correction_repository)
+guardian_log_repository = GuardianLogRepository()
+prakriti_repository = PrakritiRepository()
+fhir_handoff = FHIRHandoff()
+patient_recap_service = PatientRecapService()
 
 
 class SummariseRequest(BaseModel):
     slots: list[dict[str, Any]] = Field(default_factory=list)
     entities: list[dict[str, Any]] = Field(default_factory=list)
+    provenance: list[dict[str, Any]] = Field(default_factory=list)
     prior_encounter: dict[str, Any] | None = None
     is_return_visit: bool = False
     visit_number: int = 1
@@ -79,6 +92,46 @@ def summarise(
     request: SummariseRequest,
 ):
     try:
+        for provenance in request.provenance:
+            provenance_repository.save(provenance)
+
+        # Build the provenance store from explicitly supplied records first.
+        provenance_store = {
+            str(record["prov_id"]): record
+            for record in request.provenance
+            if record.get("prov_id")
+        }
+
+        # Also resolve provenance already persisted in MongoDB.
+        # This preserves the M5 safety rule: a referenced provenance ID
+        # is usable only when an actual valid record can be retrieved.
+        referenced_prov_ids: set[str] = set()
+
+        for slot in request.slots:
+            prov_id = slot.get("provenance_id")
+            if prov_id:
+                referenced_prov_ids.add(str(prov_id))
+
+        for entity in request.entities:
+            prov_id = entity.get("provenance_id")
+
+            if not prov_id:
+                source = entity.get("source") or {}
+                prov_id = (
+                    source.get("provenance_id")
+                    or source.get("prov_id")
+                )
+
+            if prov_id:
+                referenced_prov_ids.add(str(prov_id))
+
+        for prov_id in referenced_prov_ids:
+            if prov_id not in provenance_store:
+                stored = provenance_repository.get(prov_id)
+
+                if stored is not None:
+                    provenance_store[prov_id] = stored
+
         summary = builder.build(
             session_id=session_id,
             slots=request.slots,
@@ -86,6 +139,7 @@ def summarise(
             prior_encounter=request.prior_encounter,
             is_return_visit=request.is_return_visit,
             visit_number=request.visit_number,
+            provenance_store=provenance_store,
         )
 
         repository.save(summary)
@@ -313,3 +367,21 @@ def correct_summary_field(
 
 
 
+
+
+
+
+
+
+
+@app.get("/api/v1/summary/{summary_id}/fhir")
+def get_fhir_handoff(summary_id: str):
+    summary = repository.get_by_summary_id(summary_id)
+
+    if summary is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Summary not found",
+        )
+
+    return fhir_handoff.build(summary)

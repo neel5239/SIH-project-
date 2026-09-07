@@ -1,9 +1,11 @@
 ﻿from fastapi.testclient import TestClient
 
 from services.m5_fusion.api import app
+from services.m5_fusion.database.provenance_repository import ProvenanceRepository
 
 
 client = TestClient(app)
+provenance_repository = ProvenanceRepository()
 
 
 def test_physician_render_endpoint_requires_existing_summary():
@@ -16,6 +18,13 @@ def test_physician_render_endpoint_requires_existing_summary():
 
 def test_physician_render_endpoint_returns_summary_render():
     session_id = "physician-api-test"
+
+    provenance_repository.save({
+        "prov_id": "prov-1",
+        "kind": "text",
+        "session_id": session_id,
+        "text": "Headache for three days",
+    })
 
     response = client.post(
         f"/api/v1/session/{session_id}/summarise",
@@ -57,6 +66,13 @@ def test_physician_render_endpoint_returns_summary_render():
 
 def test_physician_text_endpoint_returns_plain_text():
     session_id = "physician-text-api-test"
+
+    provenance_repository.save({
+        "prov_id": "prov-fever",
+        "kind": "text",
+        "session_id": session_id,
+        "text": "Fever for two days",
+    })
 
     response = client.post(
         f"/api/v1/session/{session_id}/summarise",
@@ -120,6 +136,13 @@ def test_physician_render_can_hide_ayush():
 def test_physician_render_preserves_guardian_blocking():
     session_id = "physician-guardian-api"
 
+    provenance_repository.save({
+        "prov_id": "prov-diagnostic",
+        "kind": "text",
+        "session_id": session_id,
+        "text": "Patient has a diagnosis of migraine",
+    })
+
     response = client.post(
         f"/api/v1/session/{session_id}/summarise",
         json={
@@ -161,3 +184,7 @@ def test_physician_render_preserves_guardian_blocking():
 
     assert render_response.status_code == 200
     assert render_response.json()["sections"]["Chief Complaint"] == []
+
+
+
+

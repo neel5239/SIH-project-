@@ -1,9 +1,11 @@
 ﻿from fastapi.testclient import TestClient
 
 from services.m5_fusion.api import app
+from services.m5_fusion.database.provenance_repository import ProvenanceRepository
 
 
 client = TestClient(app)
+provenance_repository = ProvenanceRepository()
 
 
 def test_root_and_health():
@@ -18,6 +20,27 @@ def test_root_and_health():
 
 def test_naive_summary_vertical_slice():
     session_id = "m5-phase1-demo"
+
+    provenance_repository.save({
+        "prov_id": "prov-m3-001",
+        "kind": "text",
+        "session_id": session_id,
+        "text": "chest pain",
+    })
+
+    provenance_repository.save({
+        "prov_id": "prov-m3-002",
+        "kind": "text",
+        "session_id": session_id,
+        "text": "3 days",
+    })
+
+    provenance_repository.save({
+        "prov_id": "prov-m4-001",
+        "kind": "image_bbox",
+        "session_id": session_id,
+        "source_ref": "doc-001",
+    })
 
     response = client.post(
         f"/api/v1/session/{session_id}/summarise",
@@ -110,6 +133,13 @@ def test_naive_summary_vertical_slice():
 
 def test_unsourced_fields_are_not_rendered():
     session_id = "m5-unsourced-demo"
+
+    provenance_repository.save({
+        "prov_id": "prov-good",
+        "kind": "text",
+        "session_id": session_id,
+        "text": "headache",
+    })
 
     response = client.post(
         f"/api/v1/session/{session_id}/summarise",
@@ -237,3 +267,7 @@ def test_conflict_is_exposed_in_summary():
     assert "78 kg" in values
 
     assert len(summary["alerts"]) == 1
+
+
+
+

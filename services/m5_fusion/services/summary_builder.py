@@ -468,3 +468,4 @@ class SummaryBuilder:
             len(items)
             for items in summary.sections.values()
         )
+
