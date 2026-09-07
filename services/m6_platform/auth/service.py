@@ -1,0 +1,40 @@
+﻿from datetime import datetime, timedelta, timezone
+from fastapi import Depends, Header, HTTPException
+from jose import jwt, JWTError
+from ..settings import settings
+
+def create_token(user_id: str, role: str) -> str:
+    now = datetime.now(timezone.utc)
+    return jwt.encode(
+        {"sub": user_id, "role": role, "iat": now,
+         "exp": now + timedelta(minutes=settings.jwt_expire_minutes)},
+        settings.jwt_secret,
+        algorithm=settings.jwt_algorithm,
+    )
+
+def current_user(authorization: str | None = Header(default=None)):
+    if not authorization or not authorization.startswith("Bearer "):
+        raise HTTPException(401, "Bearer token required")
+    try:
+        data = jwt.decode(
+            authorization[7:],
+            settings.jwt_secret,
+            algorithms=[settings.jwt_algorithm],
+        )
+    except JWTError as exc:
+        raise HTTPException(401, "Invalid token") from exc
+    if not data.get("sub") or not data.get("role"):
+        raise HTTPException(401, "Invalid token claims")
+    return {"user_id": data["sub"], "role": data["role"]}
+
+def kiosk_auth(x_kiosk_key: str | None = Header(default=None)):
+    if x_kiosk_key != settings.kiosk_api_key:
+        raise HTTPException(401, "Invalid kiosk key")
+    return {"user_id": "kiosk", "role": "kiosk"}
+
+def require_roles(*roles):
+    def dep(user=Depends(current_user)):
+        if user["role"] not in roles:
+            raise HTTPException(403, "Insufficient permissions")
+        return user
+    return dep

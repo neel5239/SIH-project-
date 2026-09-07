@@ -1,0 +1,70 @@
+services:
+  gateway:
+    build:
+      context: ../..
+      dockerfile: Dockerfile
+    env_file:
+      - ../../.env
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      minio:
+        condition: service_started
+
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: purva
+      POSTGRES_USER: purva
+      POSTGRES_PASSWORD: purva_dev_password
+    volumes:
+      - edge_postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U purva -d purva"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7
+    volumes:
+      - edge_redis:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  minio:
+    image: minio/minio:latest
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    ports:
+      - "9001:9001"
+    volumes:
+      - edge_minio:/data
+
+  worker:
+    build:
+      context: ../..
+      dockerfile: Dockerfile
+    command: celery -A services.m6_platform.queue.celery_app.celery worker --loglevel=INFO
+    env_file:
+      - ../../.env
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+volumes:
+  edge_postgres:
+  edge_redis:
+  edge_minio:
