@@ -23,3 +23,6 @@ services/m2_language/tests/audio/*.wav
 
 # Local runtime/generated files
 *.log
+
+# Required M2 audio test fixture
+!services/m2_language/tests/audio/test_converted.wav
