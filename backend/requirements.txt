@@ -1,3 +1,0 @@
-# PURVA | backend/requirements.txt | owner: M6
-# python dependencies
-# TODO: implement. See docs/ for the module spec.
