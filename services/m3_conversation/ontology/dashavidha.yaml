@@ -1,0 +1,620 @@
+questions:
+
+  # ============================================================
+  # PRAKRITI
+  # Scoring is NOT performed by M3.
+  # M3 only collects the answers required by M5.
+  # ============================================================
+
+  - id: ayush.prakriti.dosha_tendency
+    section: prakriti
+    framework: ayush_prakriti
+    text_en: "Which description best matches your usual body and activity pattern?"
+    value_type: single_choice
+    options:
+      - key: vata
+        label_en: "Light build, variable energy, quick and irregular activity"
+        icon: "vata"
+      - key: pitta
+        label_en: "Medium build, strong appetite, focused and active"
+        icon: "pitta"
+      - key: kapha
+        label_en: "Sturdy build, steady energy, calm and stable"
+        icon: "kapha"
+      - key: mixed
+        label_en: "A combination of these patterns"
+        icon: "mixed"
+      - key: unsure
+        label_en: "Not sure"
+        icon: "unsure"
+    ask_if: []
+    priority: medium
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  # ============================================================
+  # VIKRITI
+  # ============================================================
+
+  - id: ayush.vikriti.current_dosha_change
+    section: vikriti
+    framework: ayush
+    text_en: "Compared with your usual state, have you noticed a recent change in your body or symptoms?"
+    value_type: single_choice
+    options:
+      - key: yes
+        label_en: "Yes"
+        icon: "yes"
+      - key: no
+        label_en: "No"
+        icon: "no"
+      - key: unsure
+        label_en: "Not sure"
+        icon: "unsure"
+    ask_if: []
+    priority: medium
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: ayush.vikriti.symptom_pattern
+    section: vikriti
+    framework: ayush
+    text_en: "Please describe the main change or imbalance you have noticed."
+    value_type: text
+    options: []
+    ask_if:
+      - slot_exists: ayush.vikriti.current_dosha_change
+    priority: medium
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  # ============================================================
+  # AGNI
+  # ============================================================
+
+  - id: ayush.agni.appetite
+    section: agni
+    framework: ayush
+    text_en: "How would you describe your appetite?"
+    value_type: single_choice
+    options:
+      - key: regular
+        label_en: "Regular"
+        icon: "regular"
+      - key: variable
+        label_en: "Variable"
+        icon: "variable"
+      - key: strong
+        label_en: "Strong"
+        icon: "strong"
+      - key: low
+        label_en: "Low"
+        icon: "low"
+      - key: unsure
+        label_en: "Not sure"
+        icon: "unsure"
+    ask_if: []
+    priority: medium
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: ayush.agni.digestion
+    section: agni
+    framework: ayush
+    text_en: "How do you usually feel after eating?"
+    value_type: single_choice
+    options:
+      - key: comfortable
+        label_en: "Comfortable"
+        icon: "comfortable"
+      - key: heaviness
+        label_en: "Heaviness"
+        icon: "heaviness"
+      - key: burning
+        label_en: "Burning or acidity"
+        icon: "burning"
+      - key: bloating
+        label_en: "Bloating or gas"
+        icon: "bloating"
+      - key: other
+        label_en: "Other"
+        icon: "other"
+    ask_if: []
+    priority: medium
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  # ============================================================
+  # KOSHTHA
+  # ============================================================
+
+  - id: ayush.koshtha.bowel_pattern
+    section: koshtha
+    framework: ayush
+    text_en: "How would you describe your usual bowel pattern?"
+    value_type: single_choice
+    options:
+      - key: regular
+        label_en: "Regular"
+        icon: "regular"
+      - key: hard
+        label_en: "Hard or difficult to pass"
+        icon: "hard"
+      - key: loose
+        label_en: "Loose or frequent"
+        icon: "loose"
+      - key: variable
+        label_en: "Variable"
+        icon: "variable"
+      - key: unsure
+        label_en: "Not sure"
+        icon: "unsure"
+    ask_if: []
+    priority: medium
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  # ============================================================
+  # AHARA - VIHARA
+  # ============================================================
+
+  - id: ayush.ahara_vihara.diet
+    section: ahara_vihara
+    framework: ayush
+    text_en: "What is your usual eating pattern?"
+    value_type: text
+    options: []
+    ask_if: []
+    priority: medium
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: ayush.ahara_vihara.hydration
+    section: ahara_vihara
+    framework: ayush
+    text_en: "How would you describe your usual water and fluid intake?"
+    value_type: single_choice
+    options:
+      - key: low
+        label_en: "Low"
+        icon: "low"
+      - key: moderate
+        label_en: "Moderate"
+        icon: "moderate"
+      - key: high
+        label_en: "High"
+        icon: "high"
+      - key: unsure
+        label_en: "Not sure"
+        icon: "unsure"
+    ask_if: []
+    priority: low
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: ayush.ahara_vihara.sleep
+    section: ahara_vihara
+    framework: ayush
+    text_en: "How would you describe your usual sleep?"
+    value_type: single_choice
+    options:
+      - key: restful
+        label_en: "Restful"
+        icon: "restful"
+      - key: disturbed
+        label_en: "Disturbed"
+        icon: "disturbed"
+      - key: insufficient
+        label_en: "Not enough sleep"
+        icon: "insufficient"
+      - key: excessive
+        label_en: "More sleep than usual"
+        icon: "excessive"
+    ask_if: []
+    priority: medium
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: ayush.ahara_vihara.activity
+    section: ahara_vihara
+    framework: ayush
+    text_en: "How would you describe your usual physical activity?"
+    value_type: single_choice
+    options:
+      - key: low
+        label_en: "Low"
+        icon: "low"
+      - key: moderate
+        label_en: "Moderate"
+        icon: "moderate"
+      - key: high
+        label_en: "High"
+        icon: "high"
+      - key: variable
+        label_en: "Variable"
+        icon: "variable"
+    ask_if: []
+    priority: low
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  # ============================================================
+  # NIDANA
+  # ============================================================
+
+  - id: ayush.nidana.possible_triggers
+    section: nidana
+    framework: ayush
+    text_en: "What food, activity, environment, routine, or other factor seems to trigger or worsen your problem?"
+    value_type: text
+    options: []
+    ask_if: []
+    priority: high
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: ayush.nidana.recent_changes
+    section: nidana
+    framework: ayush
+    text_en: "Have there been any recent changes in your diet, routine, sleep, stress, or activity?"
+    value_type: text
+    options: []
+    ask_if: []
+    priority: medium
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  # ============================================================
+  # SAMPRAPTI
+  # ============================================================
+
+  - id: ayush.samprapti.progression
+    section: samprapti
+    framework: ayush
+    text_en: "How has the problem changed or progressed since it began?"
+    value_type: text
+    options: []
+    ask_if: []
+    priority: medium
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: ayush.samprapti.associated_pattern
+    section: samprapti
+    framework: ayush
+    text_en: "What symptoms or changes tend to occur together with the main problem?"
+    value_type: text
+    options: []
+    ask_if: []
+    priority: medium
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  # ============================================================
+  # TRIVIDHA PARIKSHA
+  # ============================================================
+
+  - id: ayush.trividha.darshana
+    section: trividha_pariksha
+    framework: trividha_pariksha
+    text_en: "Have you noticed any visible change in your appearance, skin, eyes, swelling, or other physical features?"
+    value_type: text
+    options: []
+    ask_if: []
+    priority: low
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: ayush.trividha.prashna
+    section: trividha_pariksha
+    framework: trividha_pariksha
+    text_en: "Is there anything else about your symptoms or daily experience that you would like to describe?"
+    value_type: text
+    options: []
+    ask_if: []
+    priority: low
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: ayush.trividha.sparshana
+    section: trividha_pariksha
+    framework: trividha_pariksha
+    text_en: "Have you noticed any change in temperature, tenderness, texture, or sensation of the affected area?"
+    value_type: text
+    options: []
+    ask_if: []
+    priority: low
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  # ============================================================
+  # ASHTAVIDHA PARIKSHA
+  # ============================================================
+
+  - id: ayush.ashtavidha.nadi
+    section: ashtavidha_pariksha
+    framework: ashtavidha_pariksha
+    text_en: "Is a pulse or Nadi assessment available from the clinician?"
+    value_type: boolean
+    options:
+      - key: yes
+        label_en: "Yes"
+        icon: "yes"
+      - key: no
+        label_en: "No"
+        icon: "no"
+    ask_if: []
+    priority: low
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: ayush.ashtavidha.mutra
+    section: ashtavidha_pariksha
+    framework: ashtavidha_pariksha
+    text_en: "Have you noticed any significant change in urination?"
+    value_type: text
+    options: []
+    ask_if: []
+    priority: medium
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: ayush.ashtavidha.mala
+    section: ashtavidha_pariksha
+    framework: ashtavidha_pariksha
+    text_en: "Have you noticed any significant change in your stool or bowel movements?"
+    value_type: text
+    options: []
+    ask_if: []
+    priority: medium
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: ayush.ashtavidha.jihva
+    section: ashtavidha_pariksha
+    framework: ashtavidha_pariksha
+    text_en: "Have you noticed any unusual change in your tongue or taste?"
+    value_type: text
+    options: []
+    ask_if: []
+    priority: low
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: ayush.ashtavidha.shabda
+    section: ashtavidha_pariksha
+    framework: ashtavidha_pariksha
+    text_en: "Have you noticed any unusual change in your voice or speech?"
+    value_type: text
+    options: []
+    ask_if: []
+    priority: low
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: ayush.ashtavidha.sparsha
+    section: ashtavidha_pariksha
+    framework: ashtavidha_pariksha
+    text_en: "Have you noticed any unusual change in skin sensation or touch?"
+    value_type: text
+    options: []
+    ask_if: []
+    priority: low
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: ayush.ashtavidha.drishti
+    section: ashtavidha_pariksha
+    framework: ashtavidha_pariksha
+    text_en: "Have you noticed any unusual change in your eyes or vision?"
+    value_type: text
+    options: []
+    ask_if: []
+    priority: low
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: ayush.ashtavidha.akriti
+    section: ashtavidha_pariksha
+    framework: ashtavidha_pariksha
+    text_en: "Have you noticed any significant change in your overall physical appearance or body state?"
+    value_type: text
+    options: []
+    ask_if: []
+    priority: low
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  # ============================================================
+  # DASHAVIDHA PARIKSHA
+  # ============================================================
+
+  - id: ayush.dashavidha.prakriti
+    section: dashavidha_pariksha
+    framework: dashavidha_pariksha
+    text_en: "What is your usual constitution or Prakriti, if previously assessed?"
+    value_type: text
+    options: []
+    ask_if: []
+    priority: medium
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: ayush.dashavidha.vikriti
+    section: dashavidha_pariksha
+    framework: dashavidha_pariksha
+    text_en: "What current imbalance or change from your normal state have you noticed?"
+    value_type: text
+    options: []
+    ask_if:
+      - slot_exists: ayush.vikriti.current_dosha_change
+    priority: medium
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: ayush.dashavidha.sara
+    section: dashavidha_pariksha
+    framework: dashavidha_pariksha
+    text_en: "How would you describe your general physical strength and tissue quality?"
+    value_type: text
+    options: []
+    ask_if: []
+    priority: low
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: ayush.dashavidha.samhanana
+    section: dashavidha_pariksha
+    framework: dashavidha_pariksha
+    text_en: "How would you describe your overall body build and physical compactness?"
+    value_type: text
+    options: []
+    ask_if: []
+    priority: low
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: ayush.dashavidha.pramana
+    section: dashavidha_pariksha
+    framework: dashavidha_pariksha
+    text_en: "Is there any known information about your body measurements or proportions that should be recorded?"
+    value_type: text
+    options: []
+    ask_if: []
+    priority: low
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: ayush.dashavidha.satmya
+    section: dashavidha_pariksha
+    framework: dashavidha_pariksha
+    text_en: "Which foods, routines, or environments do you generally tolerate well?"
+    value_type: text
+    options: []
+    ask_if: []
+    priority: medium
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: ayush.dashavidha.sattva
+    section: dashavidha_pariksha
+    framework: dashavidha_pariksha
+    text_en: "How would you describe your usual mental resilience when dealing with stress or illness?"
+    value_type: text
+    options: []
+    ask_if: []
+    priority: low
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: ayush.dashavidha.ahara_shakti
+    section: dashavidha_pariksha
+    framework: dashavidha_pariksha
+    text_en: "How would you describe your usual capacity for eating and digesting food?"
+    value_type: text
+    options: []
+    ask_if: []
+    priority: medium
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: ayush.dashavidha.vyayama_shakti
+    section: dashavidha_pariksha
+    framework: dashavidha_pariksha
+    text_en: "How would you describe your usual capacity for physical exercise?"
+    value_type: text
+    options: []
+    ask_if: []
+    priority: low
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
+
+  - id: ayush.dashavidha.vaya
+    section: dashavidha_pariksha
+    framework: dashavidha_pariksha
+    text_en: "Which age group best describes you?"
+    value_type: single_choice
+    options:
+      - key: child
+        label_en: "Child"
+        icon: "child"
+      - key: adult
+        label_en: "Adult"
+        icon: "adult"
+      - key: older_adult
+        label_en: "Older adult"
+        icon: "older-adult"
+    ask_if: []
+    priority: medium
+    mandatory: false
+    input_modes:
+      - voice
+      - touch
